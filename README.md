@@ -1,5 +1,9 @@
-# Angular2 Emoji Picker
+# Angular 4 Emoji Picker
 [![npm version](https://badge.fury.io/js/ng-emoji-picker.svg)](https://badge.fury.io/js/ng-emoji-picker)
+
+### Important / Credits
+This package is based on https://github.com/AnteWall/angular2-emoji
+Since that repository is not being maintained I've started using this on my own projects.
 
 ## Usage
 Install through npm or yarn
@@ -9,7 +13,7 @@ yarn add ng-emoji-picker
 ```
 In your module file for your angular project.
 ```javascript
-import EmojiPickerModule from 'ng-emoji-picker';
+import {EmojiPickerModule} from 'ng-emoji-picker';
 
 @NgModule({
   ...

@@ -4,7 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {By} from '@angular/platform-browser';
 
-import {EmojiInputComponent} from './';
+import {EmojiInputComponent} from './emoji-input.component';
 
 describe('ng-emoji-picker: input', () => {
   beforeEach(() => {

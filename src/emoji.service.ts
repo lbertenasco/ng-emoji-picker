@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { EMOJI_DB } from '../db/emoji';
-
-const PARSE_REGEX = /:([a-zA-Z0-9_\-\+]+):/g;
+import { EMOJI_DB } from './emoji.db';
 
 @Injectable()
-export class EmojiUtil {
+export class EmojiService {
 
-  public get(emoji) {
+  PARSE_REGEX = /:([a-zA-Z0-9_\-\+]+):/g;
+
+  get(emoji) {
     // TODO Fix performance
     for (let data of EMOJI_DB) {
       for (let e of data.aliases) {
@@ -18,12 +18,12 @@ export class EmojiUtil {
     return emoji;
   }
 
-  public getAll() {
+  getAll() {
     return EMOJI_DB;
   }
 
-  public emojify(str) {
-    return str.split(PARSE_REGEX).map((emoji, index) => {
+  emojify(str) {
+    return str.split(this.PARSE_REGEX).map((emoji, index) => {
       // Return every second element as an emoji
       if (index % 2 === 0) { return emoji; }
       return this.get(emoji);

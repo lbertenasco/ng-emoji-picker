@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
+import {NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-import {EmojiUtil} from './util/util';
-import {EmojiInputComponent} from './input/input';
+import {EmojiInputComponent} from './src/emoji-input/emoji-input.component';
+import {EmojiService} from './src/emoji.service';
 
 @NgModule({
   imports: [
@@ -14,10 +14,21 @@ import {EmojiInputComponent} from './input/input';
     EmojiInputComponent
   ],
   providers: [
-    EmojiUtil
+    EmojiService
   ],
   exports: [
     EmojiInputComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class EmojiPickerModule {}
+
+export class EmojiPickerModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: EmojiPickerModule,
+            providers: [
+                EmojiService
+            ]
+        };
+    }
+}
