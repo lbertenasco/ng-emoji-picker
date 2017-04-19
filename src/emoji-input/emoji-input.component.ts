@@ -19,7 +19,10 @@ import { EmojiService } from '../emoji.service';
         [(ngModel)]="input"
       />
     </ng-template>
-    <div class="emoji-search" [ngClass]="popupAnchor" [hidden]="!popupOpen">
+    <div class="emoji-search"
+      [ngClass]="popupAnchor"
+      [hidden]="!popupOpen"
+      (click)="$event.stopPropagation()">
       <div class="search-header">
         <input type="search" placeholder="Search..."
           [(ngModel)]="filterEmojis"
