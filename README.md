@@ -34,14 +34,31 @@ Where to anchor the emoji popup
 
 `[onEnter]` : method to run when users presses enter key. If you want to use your parent scope inside the function make sure to bind the function (`[onEnter]="onEnterFunction.bind(this)"`)
 
+`[textArea]` : use `textarea` instead of `input` by passing an object. Available properties which bind to the textarea tag are `cols & rows`.
+
 `[(model)]` : model value to two-way bind to input fields ngModel
 
+`(setPopupAction)` : outputs a binding function to `this.openPopup(status: boolean = null)`. Call the function without parameters to toggle the picker popup.
 ##### Example
+```javascript
+@Component({})
+
+export class ExampleComponent {
+
+    public openPopup: Function;
+
+    setPopupAction(fn: any) {
+        this.openPopup = fn;
+    }
+}
+```
 ```html
 <emoji-input
+  [(model)]="bindedVariable"
+  [textArea]="{cols: 40, rows: 5}"
   [onEnter]="onEnterFunction"
   [popupAnchor]="'bottom'"
-  [(model)]="bindedVariable">
+  (setPopupAction)="setPopupAction($event)">
 </emoji-input>
 ```
 
