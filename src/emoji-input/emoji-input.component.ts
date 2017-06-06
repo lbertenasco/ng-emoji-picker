@@ -1,4 +1,12 @@
-import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  OnChanges,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 
 import { EmojiService } from '../emoji.service';
 
@@ -6,8 +14,10 @@ import { EmojiService } from '../emoji.service';
   selector: 'emoji-input',
   template: `
     <div *ngIf="textArea; else inputTag">
-      <textarea name="text" [attr.cols]="textArea.cols" [attr.rows]="textArea.rows"
+      <textarea #textAreaEl name="text" [attr.cols]="textArea.cols" [attr.rows]="textArea.rows"
         (keyup.enter)="onEnter()"
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
         (ngModelChange)="onChange($event)"
         [(ngModel)]="input">
       </textarea>
@@ -15,6 +25,8 @@ import { EmojiService } from '../emoji.service';
     <ng-template #inputTag>
       <input type="text"
         (keyup.enter)="onEnter()"
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
         (ngModelChange)="onChange($event)"
         [(ngModel)]="input"
       />
@@ -93,14 +105,21 @@ import { EmojiService } from '../emoji.service';
 
   `]
 })
-export class EmojiInputComponent implements OnInit, OnChanges {
+export class EmojiInputComponent implements AfterViewInit, OnChanges {
 
   @Input() textArea: any;
   @Input() popupAnchor = 'top';
   @Input() onEnter: Function = () => {};
   @Input() model: any;
+  @Input() autofocus: boolean = false;
+
   @Output() modelChange: any = new EventEmitter();
   @Output() setPopupAction: any = new EventEmitter();
+  @Output() blur: any = new EventEmitter();
+  @Output() focus: any = new EventEmitter();
+
+  @ViewChild('textAreaEl') textAreaEl;
+  @ViewChild('inputTag') inputTag;
 
   public input: string = '';
   public filterEmojis: string;
@@ -112,9 +131,16 @@ export class EmojiInputComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if (this.setPopupAction) {
         this.setPopupAction.emit((status) => {this.openPopup(status)});
+    }
+    if (this.autofocus) {
+      if (this.textArea) {
+        this.textAreaEl.nativeElement.focus();
+      } else {
+        this.inputTag.nativeElement.focus();
+      }
     }
     this.allEmojis = this.emojiService.getAll();
     this.clean();
@@ -123,6 +149,17 @@ export class EmojiInputComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.model !== this.input) {
       this.input = this.model;
+    }
+  }
+
+  onBlur(event) {
+    if (this.blur) {
+      this.blur.emit(event);
+    }
+  }
+  onFocus(event) {
+    if (this.focus) {
+      this.focus.emit(event);
     }
   }
 

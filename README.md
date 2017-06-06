@@ -36,9 +36,16 @@ Where to anchor the emoji popup
 
 `[textArea]` : use `textarea` instead of `input` by passing an object. Available properties which bind to the textarea tag are `cols & rows`.
 
+`[autofocus]` : autofocus on the textarea/input right after the component is created.
+
 `[(model)]` : model value to two-way bind to input fields ngModel
 
 `(setPopupAction)` : outputs a binding function to `this.openPopup(status: boolean = null)`. Call the function without parameters to toggle the picker popup.
+
+`(focus)` : outputs the event when focus on the textarea/input.
+
+`(blur)` : outputs the event when blur outside the textarea/input.
+
 ##### Example
 ```javascript
 @Component({})
