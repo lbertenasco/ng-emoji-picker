@@ -122,7 +122,7 @@ export class EmojiInputComponent implements AfterViewInit, OnChanges {
   @ViewChild('inputTag') inputTag;
 
   public input: string = '';
-  public filterEmojis: string;
+  public filterEmojis: string = '';
   public filteredEmojis: any[];
   public allEmojis: Array<any>;
   public popupOpen: boolean = false;
