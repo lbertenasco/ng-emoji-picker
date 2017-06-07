@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   AfterViewInit,
   OnChanges,
   Input,
@@ -105,7 +106,7 @@ import { EmojiService } from '../emoji.service';
 
   `]
 })
-export class EmojiInputComponent implements AfterViewInit, OnChanges {
+export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() textArea: any;
   @Input() popupAnchor = 'top';
@@ -131,10 +132,15 @@ export class EmojiInputComponent implements AfterViewInit, OnChanges {
 
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     if (this.setPopupAction) {
         this.setPopupAction.emit((status) => {this.openPopup(status)});
     }
+    this.allEmojis = this.emojiService.getAll();
+    this.clean();
+  }
+
+  ngAfterViewInit() {
     if (this.autofocus) {
       if (this.textArea) {
         this.textAreaEl.nativeElement.focus();
@@ -142,8 +148,6 @@ export class EmojiInputComponent implements AfterViewInit, OnChanges {
         this.inputTag.nativeElement.focus();
       }
     }
-    this.allEmojis = this.emojiService.getAll();
-    this.clean();
   }
 
   ngOnChanges() {
