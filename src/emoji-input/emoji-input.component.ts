@@ -16,6 +16,7 @@ import { EmojiService } from '../emoji.service';
   template: `
     <div *ngIf="textArea; else inputTag">
       <textarea #textAreaEl name="text" [attr.cols]="textArea.cols" [attr.rows]="textArea.rows"
+        (keyup)="onKeyup($event)"
         (keyup.enter)="onEnter()"
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
@@ -25,6 +26,7 @@ import { EmojiService } from '../emoji.service';
     </div>
     <ng-template #inputTag>
       <input type="text"
+        (keyup)="onKeyup($event)"
         (keyup.enter)="onEnter()"
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
@@ -118,6 +120,7 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() setPopupAction: any = new EventEmitter();
   @Output() blur: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
+  @Output() keyup: any = new EventEmitter();
 
   @ViewChild('textAreaEl') textAreaEl;
   @ViewChild('inputTag') inputTag;
@@ -156,6 +159,11 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  onKeyup(event) {
+    if (this.keyup) {
+      this.keyup.emit(event);
+    }
+  }
   onBlur(event) {
     if (this.blur) {
       this.blur.emit(event);
