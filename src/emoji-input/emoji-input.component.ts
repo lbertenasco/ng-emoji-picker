@@ -72,6 +72,9 @@ import { EmojiService } from '../emoji.service';
         flex-direction: column;
         z-index: 100;
       }
+      :host .emoji-search[hidden] {
+        display: none;
+      }
       :host .emoji-search.bottom {
         top: -202px;
       }
