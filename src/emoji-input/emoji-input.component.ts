@@ -124,6 +124,7 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() blur: any = new EventEmitter();
   @Output() focus: any = new EventEmitter();
   @Output() keyup: any = new EventEmitter();
+  @Output() emojiClick: any = new EventEmitter();
 
   @ViewChild('textAreaEl') textAreaEl;
   @ViewChild('inputTag') inputTag;
@@ -212,6 +213,7 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   onEmojiClick(e) {
     this.input = this.input + e;
     this.modelChange.emit(this.input);
+    this.emojiClick.emit(this.input);
     this.popupOpen = false;
     this.clean();
   }
