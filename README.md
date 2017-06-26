@@ -48,6 +48,8 @@ Where to anchor the emoji popup
 
 `(blur)` : outputs the event when blur outside the textarea/input.
 
+`(emojiClick)` : outputs the emoji character clicked.
+
 ##### Example
 ```javascript
 @Component({})
