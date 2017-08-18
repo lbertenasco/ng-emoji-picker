@@ -94,11 +94,14 @@ import { EmojiService } from '../emoji.service';
       }
       :host .emoji-search .emojis-container {
         border-radius: 0 0 4px 4px;
-        height: 100%;
         max-height: 160px;
         padding: 5px 12px;
         overflow: auto;
         overflow-x: hidden;
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
       }
       :host .emoji-search span {
         cursor: pointer;
