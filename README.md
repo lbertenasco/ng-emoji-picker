@@ -8,7 +8,8 @@ Since that repository is not being maintained I've started using this on my own 
 ## Usage
 Install through npm or yarn
 ```bash
-npm install ng-emoji-picker --save
+npm install ng-emoji-picker --save # Angular >= 5
+npm install ng-emoji-picker@1.1.13 --save # For Angular <= 4 please use version 1.1.13.
 yarn add ng-emoji-picker
 ```
 In your module file for your angular project.
