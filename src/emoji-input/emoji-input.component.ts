@@ -15,7 +15,10 @@ import { EmojiService } from '../emoji.service';
   selector: 'emoji-input',
   template: `
     <div *ngIf="textArea; else inputTag">
-      <textarea #textAreaEl name="text" [attr.cols]="textArea.cols" [attr.rows]="textArea.rows"
+      <textarea #textAreaEl name="text"
+        [ngClass]="[inputClass]"
+        [attr.cols]="textArea.cols"
+        [attr.rows]="textArea.rows"
         (keyup)="onKeyup($event)"
         (keyup.enter)="onEnter()"
         (blur)="onBlur($event)"
@@ -26,6 +29,7 @@ import { EmojiService } from '../emoji.service';
     </div>
     <ng-template #inputTag>
       <input type="text"
+        [ngClass]="[inputClass]"
         (keyup)="onKeyup($event)"
         (keyup.enter)="onEnter()"
         (blur)="onBlur($event)"
@@ -35,7 +39,7 @@ import { EmojiService } from '../emoji.service';
       />
     </ng-template>
     <div class="emoji-search"
-      [ngClass]="popupAnchor"
+      [ngClass]="[popupAnchor, searchClass]"
       [hidden]="!popupOpen"
       (click)="$event.stopPropagation()">
       <div class="search-header">
@@ -118,6 +122,8 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() textArea: any;
   @Input() popupAnchor = 'top';
+  @Input() inputClass = '';
+  @Input() searchClass = '';
   @Input() onEnter: Function = () => {};
   @Input() model: any;
   @Input() autofocus: boolean = false;
