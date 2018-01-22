@@ -14,7 +14,7 @@ import { EmojiService } from '../emoji.service';
 @Component({
   selector: 'emoji-input',
   template: `
-    <div *ngIf="textArea; else inputTag">
+    <ng-template [ngIf]="textArea" [ngIfElse]="inputTag">
       <textarea #textAreaEl name="text"
         [ngClass]="[inputClass]"
         [attr.cols]="textArea.cols"
@@ -26,7 +26,7 @@ import { EmojiService } from '../emoji.service';
         (ngModelChange)="onChange($event)"
         [(ngModel)]="input">
       </textarea>
-    </div>
+    </ng-template>
     <ng-template #inputTag>
       <input type="text"
         [ngClass]="[inputClass]"

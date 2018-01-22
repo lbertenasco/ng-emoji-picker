@@ -10,6 +10,7 @@ Install through npm or yarn
 ```bash
 npm install ng-emoji-picker --save # Angular >= 5
 npm install ng-emoji-picker@1.1.13 --save # For Angular <= 4 please use version 1.1.13.
+# same with yarn
 yarn add ng-emoji-picker
 ```
 In your module file for your angular project.
@@ -77,6 +78,8 @@ export class ExampleComponent {
   (setPopupAction)="setPopupAction($event)">
 </emoji-input>
 ```
+
+### Demo project available here: https://github.com/lbertenasco/ng-emoji-picker-demo
 
 ## Submitting an Issue
 
