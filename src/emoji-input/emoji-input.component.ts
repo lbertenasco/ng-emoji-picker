@@ -14,8 +14,8 @@ import { EmojiService } from '../emoji.service';
 @Component({
   selector: 'emoji-input',
   template: `
-    <ng-template [ngIf]="textArea" [ngIfElse]="inputTag">
-      <textarea #textAreaEl name="text"
+    <ng-template [ngIf]="textArea">
+      <textarea #textareaEl name="text"
         [ngClass]="[inputClass]"
         [attr.cols]="textArea.cols"
         [attr.rows]="textArea.rows"
@@ -27,16 +27,15 @@ import { EmojiService } from '../emoji.service';
         [(ngModel)]="input">
       </textarea>
     </ng-template>
-    <ng-template #inputTag>
-      <input type="text"
+    <ng-template [ngIf]="!textArea">
+      <input #inputEl type="text"
         [ngClass]="[inputClass]"
         (keyup)="onKeyup($event)"
         (keyup.enter)="onEnter()"
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
         (ngModelChange)="onChange($event)"
-        [(ngModel)]="input"
-      />
+        [(ngModel)]="input"/>
     </ng-template>
     <div class="emoji-search"
       [ngClass]="[popupAnchor, searchClass]"
@@ -45,8 +44,7 @@ import { EmojiService } from '../emoji.service';
       <div class="search-header">
         <input type="search" placeholder="Search..."
           [(ngModel)]="filterEmojis"
-          (ngModelChange)="updateFilteredEmojis()"
-          />
+          (ngModelChange)="updateFilteredEmojis()"/>
       </div>
       <div class="emojis-container">
         <span *ngFor="let emoji of filteredEmojis"
@@ -135,14 +133,15 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() keyup: any = new EventEmitter();
   @Output() emojiClick: any = new EventEmitter();
 
-  @ViewChild('textAreaEl') textAreaEl;
-  @ViewChild('inputTag') inputTag;
+  @ViewChild('textareaEl') textareaEl;
+  @ViewChild('inputEl') inputEl;
 
   public input: string = '';
   public filterEmojis: string = '';
   public filteredEmojis: any[];
   public allEmojis: Array<any>;
   public popupOpen: boolean = false;
+  public lastCursorPosition: number = 0;
 
   constructor(public emojiService: EmojiService) {
 
@@ -159,9 +158,9 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
     if (this.autofocus) {
       if (this.textArea) {
-        this.textAreaEl.nativeElement.focus();
+        this.textareaEl.nativeElement.focus();
       } else {
-        this.inputTag.nativeElement.focus();
+        this.inputEl.nativeElement.focus();
       }
     }
   }
@@ -173,16 +172,19 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onKeyup(event) {
+    this.updateCursor();
     if (this.keyup) {
       this.keyup.emit(event);
     }
   }
   onBlur(event) {
+    this.updateCursor();
     if (this.blur) {
       this.blur.emit(event);
     }
   }
   onFocus(event) {
+    this.updateCursor();
     if (this.focus) {
       this.focus.emit(event);
     }
@@ -220,7 +222,7 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onEmojiClick(e) {
-    this.input = this.input + e;
+    this.input = this.input.substr(0, this.lastCursorPosition) + e + this.input.substr(this.lastCursorPosition);
     this.modelChange.emit(this.input);
     this.emojiClick.emit(e);
     this.popupOpen = false;
@@ -231,5 +233,13 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
     this.input = this.emojiService.emojify(newValue);
     this.model = this.input;
     this.modelChange.emit(this.input);
+  }
+
+  updateCursor() {
+    if (this.textArea) {
+      this.lastCursorPosition = this.textareaEl.nativeElement.selectionStart;
+    } else {
+      this.lastCursorPosition = this.inputEl.nativeElement.selectionStart;
+    }
   }
 }
