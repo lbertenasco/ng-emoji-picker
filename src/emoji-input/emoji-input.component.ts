@@ -125,6 +125,7 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() onEnter: Function = () => {};
   @Input() model: any;
   @Input() autofocus: boolean = false;
+  @Input() closeAfterSelection: boolean = true;
 
   @Output() modelChange: any = new EventEmitter();
   @Output() setPopupAction: any = new EventEmitter();
@@ -225,8 +226,10 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
     this.input = this.input.substr(0, this.lastCursorPosition) + e + this.input.substr(this.lastCursorPosition);
     this.modelChange.emit(this.input);
     this.emojiClick.emit(e);
-    this.popupOpen = false;
-    this.clean();
+    if (this.closeAfterSelection) {
+      this.popupOpen = false;
+      this.clean();
+    }
   }
 
   onChange(newValue) {

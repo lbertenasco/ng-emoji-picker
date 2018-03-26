@@ -46,6 +46,8 @@ Where to anchor the emoji popup
 
 `[searchClass]` : assigns a class name to the search input
 
+`[closeAfterSelection]` : boolean: defaults `true`. If true closes the emoji popup after selecting an emoji.
+
 `(setPopupAction)` : outputs a binding function to `this.openPopup(status: boolean = null)`. Call the function without parameters to toggle the picker popup.
 
 `(keyup)` : outputs the keyup event on the textarea/input.
