@@ -1,7 +1,7 @@
 {
   "name": "ng-emoji-picker",
   "version": "6.0.0",
-  "description": "Angular 2 Emoji Picker",
+  "description": "Angular Emoji Picker",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -9,11 +9,9 @@
   },
   "keywords": [
     "angular",
-    "angular2",
-    "angular 2",
     "emoji",
     "picker",
-    "angular2 emoji picker"
+    "angular emoji picker"
   ],
   "license": "MIT",
   "bugs": {

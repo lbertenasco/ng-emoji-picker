@@ -1,4 +1,4 @@
-# Angular 4 Emoji Picker
+# Angular Emoji Picker
 [![npm version](https://badge.fury.io/js/ng-emoji-picker.svg)](https://badge.fury.io/js/ng-emoji-picker)
 
 ### Important / Credits
@@ -8,8 +8,9 @@ Since that repository is not being maintained I've started using this on my own 
 ## Usage
 Install through npm or yarn
 ```bash
-npm install ng-emoji-picker --save # Angular >= 5
-npm install ng-emoji-picker@1.1.13 --save # For Angular <= 4 please use version 1.1.13.
+npm install ng-emoji-picker --save # Angular >= 6
+npm install ng-emoji-picker@1.2.4 --save -E # For Angular == 5 please use version 1.2.4.
+npm install ng-emoji-picker@1.1.13 --save -E # For Angular <= 4 please use version 1.1.13.
 # same with yarn
 yarn add ng-emoji-picker
 ```
