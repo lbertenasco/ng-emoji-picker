@@ -40,6 +40,7 @@ import { EmojiService } from '../emoji.service';
     <div class="emoji-search"
       [ngClass]="[popupAnchor, searchClass]"
       [hidden]="!popupOpen"
+      [style.display]="popupOpen ? 'flex' : 'none'"
       (click)="$event.stopPropagation()">
       <div class="search-header">
         <input type="search" placeholder="Search..."
