@@ -1,6 +1,6 @@
 {
   "name": "ng-emoji-picker",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Angular Emoji Picker",
   "main": "index.js",
   "repository": {
@@ -19,14 +19,14 @@
   },
   "homepage": "https://github.com/lbertenasco/ng-emoji-picker#readme",
   "dependencies": {
-    "@angular/common": "^6.x.x",
-    "@angular/core": "^6.x.x",
-    "@angular/forms": "^6.x.x",
-    "rxjs": "^6.2.0"
+    "@angular/common": "^6.0.7",
+    "@angular/core": "^6.0.7",
+    "@angular/forms": "^6.0.7",
+    "rxjs": "^6.2.1"
   },
   "devDependencies": {
-    "@angular/compiler": "^6.x.x",
-    "@angular/compiler-cli": "^6.x.x",
+    "@angular/compiler": "^6.0.7",
+    "@angular/compiler-cli": "^6.0.7",
     "typescript": "2.7.2"
   },
   "scripts": {
