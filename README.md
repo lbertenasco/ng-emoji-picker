@@ -1,4 +1,4 @@
-# Angular Emoji Picker
+# Angular Emoji Picker [DEPRECATED] (not working for angular > 6)
 [![npm version](https://badge.fury.io/js/ng-emoji-picker.svg)](https://badge.fury.io/js/ng-emoji-picker)
 
 ### Important / Credits
