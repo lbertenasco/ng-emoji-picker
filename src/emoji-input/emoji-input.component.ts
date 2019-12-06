@@ -20,7 +20,7 @@ import { EmojiService } from '../emoji.service';
         [attr.cols]="textArea.cols"
         [attr.rows]="textArea.rows"
         (keyup)="onKeyup($event)"
-        (keyup.enter)="onEnter()"
+        (keyup.enter)="handleKeyEnter()"
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
         (ngModelChange)="onChange($event)"
@@ -125,15 +125,16 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() searchClass = '';
   @Input() onEnter: Function = () => {};
   @Input() model: any;
-  @Input() autofocus: boolean = false;
-  @Input() closeAfterSelection: boolean = true;
+  @Input() autofocus = false;
+  @Input() closeAfterSelection = true;
 
-  @Output() modelChange: any = new EventEmitter();
-  @Output() setPopupAction: any = new EventEmitter();
-  @Output() blur: any = new EventEmitter();
-  @Output() focus: any = new EventEmitter();
-  @Output() keyup: any = new EventEmitter();
-  @Output() emojiClick: any = new EventEmitter();
+  @Output() modelChange = new EventEmitter();
+  @Output() setPopupAction = new EventEmitter();
+  @Output() blur = new EventEmitter();
+  @Output() focus = new EventEmitter();
+  @Output() keyup = new EventEmitter();
+  @Output() emojiClick = new EventEmitter();
+  @Input() onKeyEnter = new EventEmitter();
 
   @ViewChild('textareaEl') textareaEl;
   @ViewChild('inputEl') inputEl;
@@ -245,5 +246,10 @@ export class EmojiInputComponent implements OnInit, AfterViewInit, OnChanges {
     } else {
       this.lastCursorPosition = this.inputEl.nativeElement.selectionStart;
     }
+  }
+
+  handleKeyEnter() {
+    this.onEnter();
+    this.onKeyEnter.emit();
   }
 }
