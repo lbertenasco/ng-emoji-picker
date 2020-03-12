@@ -92,7 +92,6 @@ import { EmojiService } from '../emoji.service';
         background-color: #eee;
         border-bottom: 1px solid #ccc;
         border-radius: 4px 4px 0 0;
-        padding: 4px 8px;
         width: 100%;
       }
       :host .emoji-search .emojis-container {
