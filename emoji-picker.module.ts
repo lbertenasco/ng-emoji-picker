@@ -23,7 +23,7 @@ import {EmojiService} from './src/emoji.service';
 })
 
 export class EmojiPickerModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<EmojiPickerModule> {
         return {
             ngModule: EmojiPickerModule,
             providers: [
