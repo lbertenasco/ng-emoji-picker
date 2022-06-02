@@ -20,7 +20,7 @@
   "homepage": "https://github.com/lbertenasco/ng-emoji-picker#readme",
   "dependencies": {
     "@angular/common": "^6.0.7",
-    "@angular/core": "^6.0.7",
+    "@angular/core": "^11.0.5",
     "@angular/forms": "^6.0.7",
     "rxjs": "^6.2.1"
   },
